@@ -57,7 +57,7 @@ jobs:
   deploy:
     needs: build_and_push
     env:
-      USERNAME: devops
+      USERNAME: ubuntu
     strategy:
       fail-fast: false
       matrix:
