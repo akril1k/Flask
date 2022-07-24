@@ -80,20 +80,9 @@ jobs:
             # Run a new container from a new image
             docker run -d \
             --restart always \
-            -p 80:5000 \
+            -p 5000:5000 \
             --name flask-app \
             ${{ env.REGISTRY }}:${{ needs.build_and_push.outputs.commit_hash }}
-
-            # # login docker
-            # docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_TOKEN
-            # docker stop flask-app
-            # docker rm flask-app
-            # # Run a new container from a new image
-            # docker run -d \
-            # --restart always \
-            # -p 5000:5000 \
-            # --name flask-app \
-            # ${{ env.REGISTRY }}:${{ needs.build_and_push.outputs.commit_hash }}
       
   #
   report:
