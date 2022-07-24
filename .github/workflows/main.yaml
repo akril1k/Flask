@@ -83,7 +83,7 @@ jobs:
             cd Flask
             
             ${{ env.REGISTRY }}:${{ needs.build_and_push.outputs.commit_hash }}
-            docker-compose up -d
+          
 
             # sudo docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_TOKEN
             # sudo docker-compose stop
