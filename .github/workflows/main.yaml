@@ -84,18 +84,16 @@ jobs:
             --name flask-app \
             ${{ env.REGISTRY }}:${{ needs.build_and_push.outputs.commit_hash }}
       
+  
   report:
     runs-on: ubuntu-latest
-    name: report
+    name: Availability check
     needs: deploy
-    steps: 
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Github Action gen-sh-unittest
-        id: action-gen-sh-unittest
-        uses: vargiuscuola/gen-sh-unittest@master
-      - name: gensh-unittest result
-        run: |           
-          curl -I 35.158.214.75:5000
- 
-          curl -I 35.156.142.47:5000   
+    strategy:
+      matrix:
+        host: ['35.158.214.75', '35.156.142.47']
+    env:
+      PORT: 5000
+    steps:
+      - name: Curl Endpoint
+        run: curl http://${{ matrix.host }}:${{ env.PORT }}/api/health-check/ok
