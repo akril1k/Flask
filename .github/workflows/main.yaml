@@ -74,15 +74,54 @@ jobs:
           port: 22
           script: |
             # login docker
-            docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_TOKEN
-            docker stop flask-app
-            docker rm flask-app
-            # Run a new container from a new image
-            docker run -d \
-            --restart always \
-            -p 5000:5000 \
-            --name flask-app \
-            ${{ env.REGISTRY }}:${{ needs.build_and_push.outputs.commit_hash }}
+            sudo docker login -u $DOCKER_USER -p $DOCKERHUB_TOKEN
+            
+            sudo docker-compose down
+            
+            # Create docker-compose
+            echo \
+            "version: '2.1'
+            services:
+              app:
+                container_name: flask_app
+                image: ${{ env.REGISTRY }}:${{ needs.build_and_push.outputs.commit_hash }}
+                ports:
+                  - 5000:5000
+                restart: always
+                depends_on:
+                    db:
+                        condition: service_healthy
+              db:
+                container_name: mysql_db
+                image: mysql:8.0.29
+                ports:
+                  - 3306:3306
+                restart: always
+                environment:
+                  MYSQL_ROOT_PASSWORD: devops
+                  MYSQL_USER: devops
+                  MYSQL_PASSWORD: devops
+                  MYSQL_DATABASE: student
+                volumes:
+                  - db:/var/lib/mysql
+                healthcheck:
+                  test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+                  timeout: 20s
+                  retries: 10
+            volumes:
+              db:" > docker-compose.yml
+            sudo docker-compose up -d
+            
+            # # login docker
+            # docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_TOKEN
+            # docker stop flask-app
+            # docker rm flask-app
+            # # Run a new container from a new image
+            # docker run -d \
+            # --restart always \
+            # -p 5000:5000 \
+            # --name flask-app \
+            # ${{ env.REGISTRY }}:${{ needs.build_and_push.outputs.commit_hash }}
       
   #
   report:
