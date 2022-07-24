@@ -82,15 +82,15 @@ jobs:
             echo \
             "version: '2.1'
             services:
-              app:
-                container_name: flask_app
-                image: ${{ env.REGISTRY }}:${{ needs.build_and_push.outputs.commit_hash }}
-                ports:
-                  - 5000:5000
-                restart: always
-                depends_on:
-                    db:
-                        condition: service_healthy
+              # app:
+              #   container_name: flask_app
+              #   image: ${{ env.REGISTRY }}:${{ needs.build_and_push.outputs.commit_hash }}
+              #   ports:
+              #     - 5000:5000
+              #   restart: always
+              #   depends_on:
+              #       db:
+              #           condition: service_healthy
               db:
                 container_name: mysql_db
                 image: mysql:8.0.29
@@ -111,7 +111,7 @@ jobs:
             volumes:
               db:" > docker-compose.yml
             sudo docker-compose up -d
-            
+
             # # login docker
             # docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_TOKEN
             # docker stop flask-app
