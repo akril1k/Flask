@@ -62,7 +62,7 @@ jobs:
       fail-fast: false
       matrix:
         os: ['35.158.214.75', '35.156.142.47']
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - name: Deploy to EC2 instanse via SSH action
         uses: appleboy/ssh-action@v0.1.3
