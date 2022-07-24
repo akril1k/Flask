@@ -84,7 +84,7 @@ jobs:
             --name flask-app \
             ${{ env.REGISTRY }}:${{ needs.build_and_push.outputs.commit_hash }}
       
-  
+  #
   report:
     runs-on: ubuntu-latest
     name: Availability check
