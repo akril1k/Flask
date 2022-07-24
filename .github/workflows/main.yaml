@@ -80,7 +80,7 @@ jobs:
             # Run a new container from a new image
             docker run -d \
             --restart always \
-            -p 5000:5000 \
+            -p 80:5000 \
             --name flask-app \
             ${{ env.REGISTRY }}:${{ needs.build_and_push.outputs.commit_hash }}
       
