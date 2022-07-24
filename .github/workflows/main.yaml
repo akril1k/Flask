@@ -78,13 +78,13 @@ jobs:
             docker stop flask-app
             docker rm flask-app
             git clone git@github.com:akril1k/Flask.git
-            cp .env ./flask/.env
-            cp key.env ./flask/key.env
+            #cp .env ./flask/.env
+            #cp key.env ./flask/key.env
             cd flask
             
             ${{ env.REGISTRY }}:${{ needs.build_and_push.outputs.commit_hash }}
             docker-compose up -d
-            
+
             # sudo docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_TOKEN
             # sudo docker-compose stop
             # sudo docker-compose rm
