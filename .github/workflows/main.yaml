@@ -47,7 +47,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       
       - name: Get environment
-        run: cp ./example.env app/.env 
+        run: cp ./example.env ./.env 
 
       - name: Build docker-compose
         run: docker-compose up -d --no-deps --build flask-app
