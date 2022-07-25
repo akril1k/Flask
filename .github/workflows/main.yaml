@@ -76,7 +76,7 @@ jobs:
             docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_TOKEN
             docker stop flask-app
             docker rm flask-app
-            git clone git@github.com:akril1k/Flask.git
+            #git clone git@github.com:akril1k/Flask.git
             # Run a new container from a new image
             docker run -d \
             --restart always \
