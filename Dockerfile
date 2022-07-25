@@ -1,11 +1,16 @@
-FROM python:3.10 as builder
+FROM python:3.8
 
-COPY requirements.txt .
+#RUN apk update && apk add --no-cache git \
+ #   build-essential
 
-RUN pip install --no-cache -r requirements.txt
 
-COPY . .
+COPY requirements.txt /requirements.txt
+
+RUN pip install --upgrade pip && pip install -r /requirements.txt
+
+COPY api_descript.json /api_descript.json
+COPY api.py /api.py
 
 EXPOSE 5000
 
-CMD python3 api.py
+CMD python /api.py
