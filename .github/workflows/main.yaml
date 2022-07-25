@@ -72,22 +72,22 @@ jobs:
           envs: ${{ secrets.DOCKER_USER }}, ${{ secrets.DOCKERHUB_TOKEN }}
           port: 22
           script: |
-            # # login docker
-            # docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_TOKEN
-            # docker stop flask-app
-            # docker rm flask-app
-            # # Run a new container from a new image
-            # docker run -d \
-            # --restart always \
-            # -p 5000:5000 \
-            # --name flask-app \
-            # ${{ env.REGISTRY }}:${{ needs.build_and_push.outputs.commit_hash }}
-            #
-            sudo docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_TOKEN
-            sudo docker-compose stop
-            sudo docker-compose rm
-            sudo docker-compose up -d
-            #SD
+            # login docker
+            docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_TOKEN
+            docker stop flask-app
+            docker rm flask-app
+            # Run a new container from a new image
+            docker run -d \
+            --restart always \
+            -p 5000:5000 \
+            --name flask-app \
+            ${{ env.REGISTRY }}:${{ needs.build_and_push.outputs.commit_hash }}
+            
+            # sudo docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_TOKEN
+            # sudo docker-compose stop
+            # sudo docker-compose rm
+            # sudo docker-compose up -d
+            # #SD
   #
   report:
     runs-on: ubuntu-latest
