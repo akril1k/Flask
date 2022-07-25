@@ -60,7 +60,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: ['3.124.194.217', '54.93226.83']
+        os: ['52.29.116.207', '3.127.232.163'] 
     runs-on: ubuntu-latest
     steps:
       - name: Deploy to EC2 instanse via SSH action
@@ -95,7 +95,7 @@ jobs:
     needs: deploy
     strategy:
       matrix:
-        host: ['3.124.194.217', '54.93226.83']
+        host: ['52.29.116.207', '3.127.232.163']
     env:
       PORT: 5000
     steps:
