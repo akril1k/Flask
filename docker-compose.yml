@@ -24,7 +24,7 @@ services:
       - api
  
   app:
-    container_name: flask
+    container_name: flaskapp
     image: valento/flask:${TAG}
     #build: ./
     # image: valento/flask:latest
