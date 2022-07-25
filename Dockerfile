@@ -1,13 +1,13 @@
-FROM python:3.8
+FROM python:3.10 as builder
+
+WORKDIR /app
+
+COPY requirements.txt .
+
+RUN pip install --no-cache -r requirements.txt
+
+COPY . /app/
 
 EXPOSE 5000
-COPY requirements.txt /requirements.txt
 
-RUN pip install --upgrade pip && pip install -r /requirements.txt
-
-COPY api_descript.json /api_descript.json
-COPY api.py /api.py
-
-
-
-CMD python /api.py
+CMD python3 api.py
