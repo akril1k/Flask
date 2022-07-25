@@ -60,8 +60,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: ['52.29.116.207', '3.127.232.163'] 
-     runs-on: ubuntu-latest
+        os: ['52.29.116.207', '3.127.232.163']
+    runs-on: ubuntu-latest
     steps:
       - name: Deploy to EC2 instanse via SSH action
         uses: appleboy/ssh-action@v0.1.3
