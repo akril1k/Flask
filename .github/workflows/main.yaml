@@ -64,14 +64,6 @@ jobs:
         os: ['3.124.194.217', '54.93.226.83']
     runs-on: ubuntu-latest
     steps:
-      - name: Deploy repo to Server
-        uses: easingthemes/ssh-deploy@v2.2.11
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.KEY }}
-          REMOTE_HOST: ${{ matrix.os}}
-          REMOTE_USER: ${{ env.USERNAME }}
-          TARGET: "/home/ubuntu/"
-          EXCLUDE: "/.github/"
       - name: Deploy to EC2 instanse via SSH action
         uses: appleboy/ssh-action@v0.1.3
         with:
@@ -89,13 +81,13 @@ jobs:
 
             # # login docker
             # sudo docker login -u $DOCKER_USER -p $DOCKER_TOKEN
-            # sudo docker stop flask-app
-            # sudo docker rm flask-app
+            # sudo docker stop flaskapp
+            # sudo docker rm flaskapp
             # # Run a new container from a new image
             # sudo docker run -d \
             # --restart always \
             # -p 5000:5000 \
-            # --name flask-app \
+            # --name flaskapp \
             # ${{ env.REGISTRY }}:${{ needs.build_and_push.outputs.commit_hash }}
           
 
