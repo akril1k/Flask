@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   db:
-    container_name: db_data
+    # container_name: db_data
     image: mysql:5.7
     volumes:
       - db_data:/var/lib/mysql
@@ -20,13 +20,13 @@ services:
       timeout: 10s
       retries: 5
       start_period: 30s
-    networks:
-      - test_api
+    # networks:
+    #   - test_api
  
   app:
     #build: ./
     container_name: flask
-    image: valento/flask:${TAG}
+    image: valento/flask:latest
     restart: always
     ports:
       - "5000:5000"
@@ -38,8 +38,8 @@ services:
     depends_on:
       db:
         condition: service_healthy
-    networks:
-      - test_api
+    # networks:
+    #   - test_api
 
 
 volumes:
