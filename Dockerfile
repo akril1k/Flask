@@ -1,5 +1,9 @@
 FROM python:3.8
 
+#RUN apk update && apk add --no-cache git \
+ #   build-essential
+
+
 COPY requirements.txt /requirements.txt
 
 RUN pip install --upgrade pip && pip install -r /requirements.txt

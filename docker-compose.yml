@@ -19,7 +19,6 @@ services:
       timeout: 10s
       retries: 5
       start_period: 30s
-
  
   app:
     build: ./
@@ -36,7 +35,5 @@ services:
         condition: service_healthy
 
 
-
 volumes:
   db_data:
-    

@@ -60,7 +60,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: ['52.29.116.207', '3.127.232.163']
+        os: ['54.93.72.177', '35.156.208.223']
     runs-on: ubuntu-latest
     steps:
       - name: Deploy to EC2 instanse via SSH action
@@ -72,20 +72,20 @@ jobs:
           envs: ${{ secrets.DOCKER_USER }}, ${{ secrets.DOCKERHUB_TOKEN }}
           port: 22
           script: |
-          
-            # sudo docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_TOKEN
-            # sudo docker-compose stop
-            # sudo docker-compose rm
-            # sudo docker-compose up -d
-            # add image tag to env vars for docker-compose.yml
-            export TAG=${{ needs.build_and_push.outputs.commit_hash }}
-            # login docker
-            echo $DOCKERHUB_TOKEN | docker login -u $DOCKER_USER --password-stdin
-            # run containers
-            docker compose -f ~/flask/docker-compose.yml down
-            docker compose -f ~/flask/docker-compose.yml up -d
-            # logout docker
-            docker logout
+
+            sudo docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_TOKEN
+            sudo docker-compose stop
+            sudo docker-compose rm
+            sudo docker-compose up -d
+            # # add image tag to env vars for docker-compose.yml
+            # export TAG=${{ needs.build_and_push.outputs.commit_hash }}
+            # # login docker
+            # echo $DOCKERHUB_TOKEN | docker login -u $DOCKER_USER --password-stdin
+            # # run containers
+            # docker compose -f ~/flask/docker-compose.yml down
+            # docker compose -f ~/flask/docker-compose.yml up -d
+            # # logout docker
+            # docker logout
 
   #
   report:
@@ -94,7 +94,7 @@ jobs:
     needs: deploy
     strategy:
       matrix:
-        host: ['52.29.116.207', '3.127.232.163']
+        host: ['54.93.72.177', '35.156.208.223']
     env:
       PORT: 5000
     steps:
